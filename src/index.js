@@ -5,15 +5,6 @@ const { DAYS } = require("./enum/days");
 const { getRandomIndex } = require("./utils/randomizer");
 const { AVAILAIBILITY_MOCK } = require("./mock/availaibility");
 
-function updateNextShiftArray(index, daysArray, filterElem) {
-  if (index == 6) {
-    return new Array();
-  }
-
-  let curDay = daysArray[index + 1];
-  return AVAILAIBILITY_MOCK[curDay].day.filter((_) => _ !== filterElem);
-}
-
 function populate(schedule) {
   let populated = {};
   Object.keys(schedule).forEach((d) => {
@@ -28,6 +19,15 @@ function populate(schedule) {
   return populated;
 }
 
+function updateNextShiftArray(index, daysArray, filterElem) {
+  if (index == 6) {
+    return new Array();
+  }
+
+  let curDay = daysArray[index + 1];
+  return AVAILAIBILITY_MOCK[curDay].day.filter((_) => _ !== filterElem);
+}
+
 function main() {
   let schedule = new Object();
   let shiftArray = new Array();
@@ -39,25 +39,6 @@ function main() {
   for (let i = 0; i < daysArray.length; i++) {
     let shift = { day: "", night: "" };
     let currentDay = daysArray[i];
-
-    // if (i == 0) {
-    //   availaibilityArray = AVAILAIBILITY_MOCK[currentDay].day
-    //   let indexDay = getRandomIndex(availaibilityArray.length - 1);
-    //   shift.day = pIds[indexDay];
-    //   nextShiftArray = pIds.filter((_) => _ !== pIds[indexDay]);
-
-    //   let indexNight = getRandomIndex(nextShiftArray.length - 1);
-    //   shift.night = nextShiftArray[indexNight];
-    //   nextShiftArray = pIds.filter((_) => _ !== nextShiftArray[indexNight]);
-    // } else {
-    //   let indexDay = getRandomIndex(nextShiftArray.length - 1);
-    //   shift.day = nextShiftArray[indexDay];
-    //   nextShiftArray = pIds.filter((_) => _ !== nextShiftArray[indexDay]);
-
-    //   let indexNight = getRandomIndex(nextShiftArray.length - 1);
-    //   shift.night = nextShiftArray[indexNight];
-    //   nextShiftArray = pIds.filter((_) => _ !== nextShiftArray[indexNight]);
-    // }
 
     const dayAvailaibility = AVAILAIBILITY_MOCK[currentDay].day;
     const nightAvailaibility = AVAILAIBILITY_MOCK[currentDay].night;
